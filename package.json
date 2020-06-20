@@ -1,0 +1,26 @@
+{
+  "name": "wrmwrm",
+  "version": "1.0.0",
+  "description": "wrm",
+  "main": "wrm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/blottn/wrm.git"
+  },
+  "keywords": [
+    "wrm"
+  ],
+  "author": "blottn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blottn/wrm/issues"
+  },
+  "homepage": "https://github.com/blottn/wrm#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0"
+  }
+}
