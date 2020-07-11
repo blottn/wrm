@@ -21,6 +21,7 @@
   "homepage": "https://github.com/blottn/wrm#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-ws": "^4.0.0"
+    "express-ws": "^4.0.0",
+    "ws": "^7.3.1"
   }
 }
