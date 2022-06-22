@@ -31,7 +31,7 @@ wss.on('connection', (socket, request, client) => {
 
     socket.on('message', (data) => {
         if (debug)
-            console.log(`${request.socket.remoteAddress} %s`, data);
+            console.log(`${request.socket.remoteAddress} in ${request.url} sent: %s`, data);
 
         wrmholes[request.url].filter(s => s != socket)
             .map(client => client.send(data));
