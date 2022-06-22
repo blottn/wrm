@@ -1,24 +1,23 @@
 const http = require('http');
-const ws = require('ws');
+const { WebSocketServer } = require('ws');
 
-const port = 3000;
+// Arg parse
+let minimist_opts = {
+    default: {
+        debug: false,
+        port: 3000
+    },
+};
+let args = require('minimist')(process.argv.slice(2), minimist_opts);
+let { debug, port } = args;
 
-let server = http.createServer((req, res) => {
-    response.writeHead(404);
-    response.end();
-});
+// Create server
+const wss = new WebSocketServer({ port });
 
-server.listen(port, () => {
-    console.log(`wrm listening on ${port}`);
-});
-
-let wss = new ws.Server({
-    server: server
-});
-
+// Initiate plugboard
 let wrmholes = {};
 
-wss.on('connection', (socket, request) => {
+wss.on('connection', (socket, request, client) => {
     if (wrmholes[request.url] == undefined) {
         wrmholes[request.url] = [];
     }
@@ -31,7 +30,13 @@ wss.on('connection', (socket, request) => {
     });
 
     socket.on('message', (data) => {
+        if (debug)
+            console.log(`${request.socket.remoteAddress} %s`, data);
+
         wrmholes[request.url].filter(s => s != socket)
             .map(client => client.send(data));
     });
 });
+
+console.log(`Swizzling the spacetime continuum... (on port ${port})`);
+console.log(`Debug mode: ${debug}`);
