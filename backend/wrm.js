@@ -1,4 +1,3 @@
-const http = require('http');
 const { WebSocketServer } = require('ws');
 
 // Arg parse
