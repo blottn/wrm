@@ -16,16 +16,28 @@ const wss = new WebSocketServer({ port });
 // Initiate plugboard
 let wrmholes = {};
 
-wss.on('connection', (socket, request, client) => {
+wss.on('connection', (socket, request) => {
+    let hb = setInterval(() => {
+      // TODO check 
+      socket.ping();
+    });
+    console.log(`new connection on ${request.url}`);
     if (wrmholes[request.url] == undefined) {
         wrmholes[request.url] = [];
     }
     wrmholes[request.url].push(socket);
 
     socket.on('close', (code, reason) => {
+        clearInterval(hb);
+        console.log(`connection closed ${request.url}`);
         wrmholes[request.url] = wrmholes[request.url].filter(
             s => s != socket
         );
+        console.log(`${request.url} has ${wrmholes[request.url].lenth}`);
+    });
+
+    socket.on('error', msg => {
+      console.log(msg);
     });
 
     socket.on('message', (data) => {

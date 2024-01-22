@@ -1,0 +1,14 @@
+services:
+  wrm:
+    image: wrm
+    build:
+      context: .
+    entrypoint:
+      - node
+      - /wrm/wrm.js
+      - --debug
+      - "true"
+      - --port
+      - "3141"
+    ports:
+      - 3141:3141
