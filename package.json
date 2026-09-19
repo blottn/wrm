@@ -20,8 +20,6 @@
   },
   "homepage": "https://github.com/blottn/wrm#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "express-ws": "^4.0.0",
     "minimist": "^1.2.6",
     "ws": "^8.8.0"
   }
